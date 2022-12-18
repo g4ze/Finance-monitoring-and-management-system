@@ -41,4 +41,3 @@ def animation2():
         i += 1
         if i == 7*10:
             break
-animation1()

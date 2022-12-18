@@ -1,35 +1,49 @@
 import gspread
 from variables import *
 class Reader:
+    gc=gspread.service_account(filename='creds.json')
+    sh=gc.open('test')
     def readall(self,sheetname):
-        self.gc=gspread.service_account(filename='creds.json')
-        self.sh=self.gc.open('test')
-        self.ws=self.sh.worksheet(sheetname)
-        self.res=self.ws.get_all_records()
-        return self.res
+        
+        ws=self.sh.worksheet(sheetname)
+        res=ws.get_all_records()
+        return res
+
+    def readrow(self,name,r):
+        ws=self.sh.worksheet(name)
+        values_list = ws.row_values(r)
     def readcol(self,col,name):
-        if col==0:return 0 
-        gc=gspread.service_account(filename='creds.json')
-        sh=gc.open('test')
-        ws=sh.worksheet(name)
+        
+        
+        ws=self.sh.worksheet(name)
         print(aro)
-        return ws.col_values(col)
+        if col==0:
+            col=int(ws.acell('B4').value)
+            return ws.col_values(col)
+        else:
+            return ws.col_values(col)
     def check(self,name):
-        gc=gspread.service_account(filename='creds.json')
-        sh=gc.open('test')
-        ws=sh.worksheet('sheet1')
+        
+        ws=self.sh.worksheet('sheet1')
         l = (ws.acell('A1').value).split(',')
         for i in l:
             if name in i:
                 return True
         return False    
+    def months(self,name):
+        
+        ws=self.sh.worksheet(name)
+        print(aro)
+        col=int(ws.acell('B4').value)
+        return col
 
 class newsheet(Reader):
+    gc=gspread.service_account(filename='creds.json')
+    sh=gc.open('test')
     def newws(self,name,job,income):
-        gc=gspread.service_account(filename='creds.json')
-        sh=gc.open('test')
-        worksheet = sh.add_worksheet(title=name, rows=100, cols=20)
-        ws=sh.sheet1
+        
+        worksheet = self.sh.add_worksheet(title=name, rows=100, cols=20)
+        ws=self.sh.sheet1
         st=ws.acell('A1').value
         ws.update('A1',st+','+name)
         worksheet.update('A1',f'name: {name}')
@@ -51,10 +65,11 @@ class newsheet(Reader):
         ######################################################################################3
 
 class infoUpdater:
+    gc=gspread.service_account(filename='creds.json')
+    sh=gc.open('test')
     def updates(self,expenses,name):
-        gc=gspread.service_account(filename='creds.json')
-        sh=gc.open('test')
-        ws=sh.worksheet(name)
+        
+        ws=self.sh.worksheet(name)
         month=int(ws.acell('B4').value)+1
         ws.update('B4',month)
         col=chr(65+month)
@@ -64,3 +79,4 @@ class infoUpdater:
             ws.update(f'{col}{i}',f'{expenses[j]}')
             j+=1
         print(('--------------All information is now updated--------------').upper())
+        print(div1)

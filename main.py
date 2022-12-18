@@ -3,27 +3,32 @@ from userupdate import userupdate
 from displayinfo import displayinfo
 from variables import *
 from menus import *
-#=====================================================
+#=========================================================
 # # OBJECT CREATION FOR ALL CLASSES
-#-----------------------------------------------------
+#----------------------------------------------------------
 menu=menus()
 info=Reader()
 userup=userupdate()
 display=displayinfo()
-#======================================================
+#==========================================================
 username=''
-
+print(div1)
 print("====================== HELLO I'M ARORA A PERSONAL FINANCE ADVISOR=================================")
+print(div1)
 while True:
-    
+    print(div1)
     print('==================DEAR USER, PLEASE ENTER YOUR NAME===========================')
     print('type "ex" to exit anytime')
     username=input('NAME: ')
+    print(div1)
     if username=='ex':
         break
     # print(info.check(username))
     if info.check(username):
         print('==========================WHAT DO YOU WANT ME TO ASSIST WITH============================')
+        menu=menus()
+        if(menu.menu1(username)=='ex'):
+            continue
     else:
         print('===============USER NOT FOUND===========================')
         while True:

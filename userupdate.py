@@ -18,7 +18,9 @@ class userupdate:
 
 
     def infoUpdate(self,username):
+        print(div1)
         print((f'******** ARORA IS Updating {username} userifo********').upper())
+        print(div1)
         print(("Tell me how much you spent this month on the following(enter 0 for no input): ").upper())
         electricitybill= int(input("electricitybill: "))
         internet2= int(input("internet bill: "))
@@ -30,6 +32,9 @@ class userupdate:
         edu2= int(input("investment on your education like books and courses: "))
         give2= int(input("donation: "))
         other2= int(input("enter the money you spend on other things like shopping etc: "))
+        print(div1)
         expense=[electricitybill,internet2,rent2,entertainment2,groceries2,petrol2,invest2,edu2,give2,other2]
         print(aro)
+        print(div1)
         infoUpdater().updates( expense,username)
+        print(div1)
