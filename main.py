@@ -25,10 +25,20 @@ while True:
         break
     # print(info.check(username))
     if info.check(username):
-        print('==========================WHAT DO YOU WANT ME TO ASSIST WITH============================')
-        menu=menus()
-        if(menu.menu1(username)=='ex'):
-            continue
+        while True:
+            print(div1)
+            pas=input('Enter password: ')
+            if pas=='ex':
+                break
+            if info.checkPass(username,pas):
+                
+                print('==========================WHAT DO YOU WANT ME TO ASSIST WITH============================')
+                menu=menus()
+                if(menu.menu1(username)=='ex'):
+                    continue
+            else:
+                print(div1)
+                print('Wrong Password')
     else:
         print('===============USER NOT FOUND===========================')
         while True:
@@ -47,7 +57,7 @@ while True:
                     chc=input('Y/N')
                     if chc=='N': break
                     else:
-                        menus().menu1()
+                        menus().menu1(username)
             elif chc=='N':
                 print('=======YOU ENTERED NO!===========')
                 break

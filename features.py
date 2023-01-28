@@ -27,10 +27,11 @@ class features:
     def analysis(self, name):
         print(div1)
         print('Running the analyser')
+        print('Total month data',Reader().months(name))
         mo=int(input('enter the number of last months to analyse(enter 0 for latest month): '))
         col1=Reader().readcol(1,name)
         totalincome=int(col1[2].split(' ')[1])
-        if not(mo=='0'):
+        if not(mo==0):
             totalincome*=(int(mo))
         def colvals(m):
             reader=Reader()
@@ -85,6 +86,44 @@ class features:
                 graph().display(name)
             print(div1)
         analyser(int(mo))
+
+
+    def report(self,name):
+        def colvals(m):
+            reader=Reader()
+            col=reader.readcol(m,name)
+            
+            necc=int(col[4])+int(col[5])+int(col[6])+int(col[8])+int(col[9])
+            fun=int(col[7])+int(col[13])
+            invest=int(col[10])
+            charity=int(col[12])
+            edu=int(col[11])
+            exp=necc+fun+invest+charity+edu
+            return {'necc':necc,'fun':fun,'invest':invest,'charity':charity,'edu':edu,'exp':exp}
+        def analyser(mon):
+            
+            month=Reader().months(name)+1
+            
+            totalvalues={'necc':0,'fun':0,'invest':0,'charity':0,'edu':0,'exp':0}
+            values={}
+            if mon ==0:
+                mon=1
+            for i in range(month-(mon),month):
+                values=colvals(i+1)
+                for key in values:
+                    totalvalues[key]=totalvalues[key]+values[key]
+                values=totalvalues
+            print(div1)
+            
+            print("spending on necessaties:    ",values['necc'])
+            print("spending on fun:            ",values['fun'])
+            print("spending on investment:     ",values['invest'])
+            print("spending on charity:        ",values['charity'])
+            print("spending on education:      ",values['edu'])
+            
+            
+        analyser(int(0))
+        features().fornext(name)
     
 class graph:
     def colvals(self,m,name):

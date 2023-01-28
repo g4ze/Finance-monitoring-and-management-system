@@ -30,6 +30,9 @@ class Reader:
             if name in i:
                 return True
         return False    
+    def checkPass(self,name,pas):
+        ws=self.sh.worksheet(name)
+        return ws.acell('B1').value==pas
     def months(self,name):
         
         ws=self.sh.worksheet(name)
@@ -41,11 +44,13 @@ class newsheet(Reader):
     gc=gspread.service_account(filename='creds.json')
     sh=gc.open('test')
     def newws(self,name,job,income):
-        
+        pas=input('Enter new pass: ')
+
         worksheet = self.sh.add_worksheet(title=name, rows=100, cols=20)
         ws=self.sh.sheet1
         st=ws.acell('A1').value
         ws.update('A1',st+','+name)
+        worksheet.update('B1',pas)
         worksheet.update('A1',f'name: {name}')
         worksheet.update('A2',f'job: {job}')
         worksheet.update('A3',f'income: {income}')

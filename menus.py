@@ -22,6 +22,9 @@ class menus:
             if chc=='2':
                 print(div1)
                 feature.analysis(name)
+            if chc=='3':
+                print(div1)
+                feature.report(name)
             elif chc=='4':
                 print(div1)
                 LoanCalculator().calc()
