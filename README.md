@@ -1,0 +1,1 @@
+An elaborate finance monitoring and recommendation software based on a person’s monthly based expenditure and income. The software recommends on how the person should spend during next months to achieve their goals. Has a functional cloud based google sheet database, login logout system, graphical expenditure representation and loan calculator.
